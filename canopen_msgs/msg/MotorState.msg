@@ -1,0 +1,11 @@
+builtin_interfaces/Time stamp
+int8[] id
+string[] name
+float32[] position
+float32[] velocity
+float32[] acceleration
+float32[] torque
+float32[] min_position_limit
+float32[] max_position_limit
+uint32[] status_word
+uint16[] error_code

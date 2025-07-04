@@ -1,0 +1,20 @@
+<library path="src">
+  <class 
+    name="CANopenController"
+    type="canopen_rqt.canopen_controller.CANopenController"
+    base_class_type="rqt_gui_py::Plugin">
+    <description>
+      A plugin for controlling CANopen motors.
+    </description>
+    <qtgui>
+      <group>
+        <label>CANopen Controller</label>
+        <icon type="theme">folder</icon>
+        <statustip>CANopen Controller</statustip>
+      </group>
+      <label>CANopen Controller</label>
+      <icon type="theme">utilities-system-monitor</icon>
+      <statustip>CANopen Controller</statustip>
+    </qtgui>
+  </class>
+</library>

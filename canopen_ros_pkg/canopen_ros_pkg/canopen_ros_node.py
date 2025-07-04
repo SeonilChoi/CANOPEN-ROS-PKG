@@ -3,6 +3,7 @@ from rclpy.node import Node
 from std_msgs.msg import Float64
 from sensor_msgs.msg import JointState
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
+from canopen_msgs.msg import MotorState
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy, QoSDurabilityPolicy
 
 from functools import partial
@@ -32,6 +33,9 @@ class CANopenROSNode(Node):
         self.joint_state_publisher = self.create_publisher(
             JointState, 'joint_states', self.QOS_REKL5V
         )
+        self.motor_state_publisher = self.create_publisher(
+            MotorState, 'motor_states', self.QOS_REKL5V
+        )
         self.timer = self.create_timer(
             0.01, self.publish_joint_state
         )
@@ -47,34 +51,50 @@ class CANopenROSNode(Node):
                 callback, self.QOS_REKL5V
             )
 
-        self.is_error, _ = self.motor_manager.check_motor_states()
+        states, self.is_error, error_code = self.motor_manager.check_motor_states()
+        if self.is_error:
+            self.motor_manager.stop_sync_all_motors()
+            self.get_logger().info(f'[CANopenROSNode::init] Invalid motor states')
 
     def publish_joint_state(self):
-        self.is_error, _ = self.motor_manager.check_motor_states()
+        try:
+            states, self.is_error, error_codes = self.motor_manager.check_motor_states()
+            position_range_limits = self.motor_manager.get_position_range_limits()
+        except Exception as e:
+            self.get_logger().error(f'[CANopenROSNode::publish_joint_state] Failed to read motor info: {e}')
         if self.is_error:
             self.motor_manager.stop_sync_all_motors()
             self.get_logger().info(f'[CANopenROSNode::publish_joint_state] Invalid motor states')
             
-        msg = JointState()
-        msg.header.stamp = self.get_clock().now().to_msg()
-        try:
-            positions = self.motor_manager.get_positions()
-            velocities = self.motor_manager.get_velocities()
-            torques = self.motor_manager.get_torques()
-        except Exception as e:
-            self.get_logger().error(f'[CANopenROSNode::publish_joint_state] Failed to read motor info: {e}')
+        joint_msg = JointState()
+        motor_msg = MotorState()
+
+        joint_msg.header.stamp = self.get_clock().now().to_msg()
+        motor_msg.stamp = self.get_clock().now().to_msg()
         
-        for motor_name in self.motor_manager.name_to_id.keys():
-            msg.name.append(motor_name)
-            msg.position.append(positions[motor_name])
-            msg.velocity.append(velocities[motor_name])
-            msg.effort.append(torques[motor_name])
-        self.joint_state_publisher.publish(msg)
+        for motor_name, motor_id in self.motor_manager.name_to_id.items():
+            joint_msg.name.append(motor_name)
+            joint_msg.position.append(states[motor_name]['position'])
+            joint_msg.velocity.append(states[motor_name]['velocity'])
+            joint_msg.effort.append(states[motor_name]['torque'])
+            
+            motor_msg.id.append(motor_id)
+            motor_msg.name.append(motor_name)
+            motor_msg.position.append(states[motor_name]['position'])
+            motor_msg.velocity.append(states[motor_name]['velocity'])
+            motor_msg.torque.append(states[motor_name]['torque'])
+            motor_msg.min_position_limit.append(position_range_limits[motor_name][0])
+            motor_msg.max_position_limit.append(position_range_limits[motor_name][1])
+            motor_msg.status_word.append(states[motor_name]['statusword'])
+            motor_msg.error_code.append(error_codes[motor_name])
+
+        self.joint_state_publisher.publish(joint_msg)
+        self.motor_state_publisher.publish(motor_msg)
 
     def joint_trajectory_callback(self, msg):
         if self.is_error:
             self.motor_manager.stop_sync_all_motors()
-            self.get_logger().info(f'[CANopenROSNode::publish_joint_state] Invalid motor states')
+            self.get_logger().info(f'[CANopenROSNode::joint_trajectory_callback] Invalid motor states')
         
         for idx, joint_name in enumerate(msg.joint_names):
             goal_position = msg.points[0].positions[idx]
@@ -86,7 +106,7 @@ class CANopenROSNode(Node):
     def joint_command_callback(self, msg, name):
         if self.is_error:
             self.motor_manager.stop_sync_all_motors()
-            self.get_logger().info(f'[CANopenROSNode::publish_joint_state] Invalid motor states')
+            self.get_logger().info(f'[CANopenROSNode::joint_command_callback] Invalid motor states')
         
         try:
             self.motor_manager.set_position(name, msg.data)

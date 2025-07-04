@@ -14,6 +14,7 @@ def generate_launch_description():
         package='canopen_ros_pkg',
         executable='canopen_ros_node',
         name='canopen_ros_node',
+        namespace='canopen',
         parameters=[
             {'motor_config_file_path': motor_config_file_path}
         ],
