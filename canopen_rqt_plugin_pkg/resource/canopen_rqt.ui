@@ -6,181 +6,43 @@
       <rect>
         <x>0</x>
         <y>0</y>
-        <width>640</width>
-        <height>480</height>
+        <width>1920</width>
+        <height>1080</height>
       </rect>
+    </property>
+    <property name="minimumSize">
+      <size>
+        <width>1920</width>
+        <height>1080</height>
+      </size>
+    </property>
+    <property name="maximumSize">
+      <size>
+        <width>1920</width>
+        <height>1080</height>
+      </size>
     </property>
     <property name="windowTitle">
       <string>CANopen RQt</string>
     </property>
-
-    <widget class="QWidget" name="Widget_1">
+    
+    <widget class="QWidget" name="CentralWidget">
       <property name="geometry">
         <rect>
           <x>0</x>
           <y>0</y>
-          <width>640</width>
-          <height>480</height>
+          <width>1920</width>
+          <height>1080</height>
         </rect>
       </property>
-      
-      <layout class="QVBoxLayout" name="VerticalLayout_1">
+      <layout class="QVBoxLayout" name="CentralLayout">
         <item>
           <widget class="QTabWidget" name="TabWidget">
-            <widget class="QWidget" name="Widget_tab_1">
-              <attribute name="title">
-                <string>Motor Controller</string>
-              </attribute>
-              
-              <layout class="QVBoxLayout" name="VerticalLayout_tab_1">
-                <item>
-                  <widget class="QGroupBox" name="GroupBox_tab_1_1">                    
-                    <property name="title">
-                      <string>Joint Controller</string>
-                    </property>
-
-                    <layout class="QVBoxLayout" name="VerticalLayout_tab_1_1">
-                      <item>
-                        <layout class="QHBoxLayout" name="HorizontalLayout_tab_1_1_1">
-                          <item>
-                            <widget class="QLabel" name="Label_tab_1_1_1">
-                              <property name="text">
-                                <string>0</string>
-                              </property>
-                              <property name="alignment">
-                                <set>Qt::AlignCenter</set>
-                              </property>
-                              <property name="minimumSize">
-                                <size>
-                                  <width>40</width>
-                                  <height>20</height>
-                                </size>
-                              </property>
-                            </widget>
-                          </item>
-
-                          <item>
-                            <widget class="QSlider" name="HorizontalSlider_tab_1_1_2">
-                              <property name="orientation">
-                                <enum>Qt::Horizontal</enum>
-                              </property>
-                            </widget>
-                          </item>
-
-                          <item>
-                            <widget class="QLabel" name="Label_tab_1_1_3">
-                              <property name="text">
-                                <string>0</string>
-                              </property>
-                              <property name="alignment">
-                                <set>Qt::AlignCenter</set>
-                              </property>
-                              <property name="minimumSize">
-                                <size>
-                                  <width>40</width>
-                                  <height>20</height>
-                                </size>
-                              </property>
-                            </widget>
-                          </item>
-                        </layout>
-                      </item>
-                      <item>
-                        <layout class="QHBoxLayout" name="HorizontalLayout_tab_1_1_2">
-                          <item>
-                            <widget class="QToolButton" name="ToolButton_tab_1_1_4">
-                              <property name="text">
-                                <string>Select a motor...</string>
-                              </property>
-                              <property name="popupMode">
-                                <enum>QToolButton::MenuButtonPopup</enum>
-                              </property>
-                              <property name="toolButtonStyle">
-                                <enum>Qt::ToolButtonTextBesideIcon</enum>
-                              </property>
-                              <property name="minimumSize">
-                                <size>
-                                  <width>300</width>
-                                  <height>50</height>
-                                </size>
-                              </property>
-                              <property name="maximumSize">
-                                <size>
-                                  <width>300</width>
-                                  <height>50</height>
-                                </size>
-                              </property>
-                            </widget>
-                          </item>
-                          <item>
-                            <widget class="QLabel" name="Label_tab_1_1_5">
-                              <property name="text">
-                                <string>0</string>
-                              </property>
-                              <property name="alignment">
-                                <set>Qt::AlignCenter</set>
-                              </property>
-                              <property name="minimumSize">
-                                <size>
-                                  <width>40</width>
-                                  <height>20</height>
-                                </size>
-                              </property>
-                            </widget>
-                          </item>
-                        </layout>
-                      </item>
-                    </layout>
-                  </widget>
-                </item>
-
-                <item>
-                  <widget class="QGroupBox" name="GroupBox_tab_1_2">
-                    <property name="title">
-                      <string>Mode Selector</string>
-                    </property>
-                    
-                    <layout class="QHBoxLayout" name="HorizontalLayout_tab_1_2">
-                      <item>
-                        <widget class="QPushButton" name="PushButton_tab_1_2_1">
-                          <property name="text">
-                            <string>Home</string>
-                          </property>
-                        </widget>
-                      </item>
-
-                      <item>
-                        <widget class="QPushButton" name="PushButton_tab_1_2_2">
-                          <property name="text">
-                            <string>Up</string>
-                          </property>
-                        </widget>
-                      </item>
-
-                      <item>
-                        <widget class="QPushButton" name="PushButton_tab_1_2_3">
-                          <property name="text">
-                            <string>Down</string>
-                          </property>
-                        </widget>
-                      </item>
-                    </layout>
-                  </widget>
-                </item>
-              </layout>
-            </widget>
-
-            <widget class="QWidget" name="Widget_tab_2">
-              <attribute name="title">
-                <string>Status Monitor</string>
-              </attribute>
-            </widget>
-          </widget>
+          </widget> <!--Tabwidget-->
         </item>
       </layout>
-
-    </widget>
-  </widget>
+    </widget> <!--CentralWidget-->
+  </widget> <!--MainWindow-->
   <resources/>
   <connections/>
 </ui>

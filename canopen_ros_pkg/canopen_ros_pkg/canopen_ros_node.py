@@ -9,6 +9,8 @@ from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy, QoSDur
 from functools import partial
 from canopen_sdk.manager import load_motor_manager
 
+PI = 3.141592653589793
+
 class CANopenROSNode(Node):
     QOS_REKL5V = QoSProfile(
         reliability=QoSReliabilityPolicy.RELIABLE,
@@ -80,11 +82,11 @@ class CANopenROSNode(Node):
             
             motor_msg.id.append(motor_id)
             motor_msg.name.append(motor_name)
-            motor_msg.position.append(states[motor_name]['position'])
+            motor_msg.position.append(states[motor_name]['position'] / PI * 180.0)
             motor_msg.velocity.append(states[motor_name]['velocity'])
             motor_msg.torque.append(states[motor_name]['torque'])
-            motor_msg.min_position_limit.append(position_range_limits[motor_name][0])
-            motor_msg.max_position_limit.append(position_range_limits[motor_name][1])
+            motor_msg.min_position_limit.append(position_range_limits[motor_name][0] / PI * 180.0)
+            motor_msg.max_position_limit.append(position_range_limits[motor_name][1] / PI * 180.0)
             motor_msg.status_word.append(states[motor_name]['statusword'])
             motor_msg.error_code.append(error_codes[motor_name])
 
@@ -111,7 +113,7 @@ class CANopenROSNode(Node):
         try:
             self.motor_manager.set_position(name, msg.data)
         except Exception as e:
-                self.get_logger().error(f'[CANopenROSNode::joint_command_callback] Failed to set goal position for {joint_name}: {e}')
+            self.get_logger().error(f'[CANopenROSNode::joint_command_callback] Failed to set goal position for {joint_name}: {e}')
     
 def main(args=None):
     rclpy.init(args=args)
