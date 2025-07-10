@@ -16,7 +16,6 @@
   <depend>std_msgs</depend>
   <depend>sensor_msgs</depend>
   <depend>trajectory_msgs</depend>
-  <depend>canopen_sdk</depend>
   <depend>canopen_msgs</depend>
 
   <export>
