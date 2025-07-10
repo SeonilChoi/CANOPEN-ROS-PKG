@@ -1,1 +1,2 @@
-ros-humble-rqt_gui
+ros-humble-rqt-gui
+ros-humble-rqt-gui-py
