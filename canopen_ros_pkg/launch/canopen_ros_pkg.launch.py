@@ -18,7 +18,7 @@ def generate_launch_description():
         parameters=[
             {'motor_config_file_path': motor_config_file_path}
         ],
-        output='screen'
+        output='screen',
     )
 
     return LaunchDescription([

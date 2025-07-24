@@ -1,9 +1,9 @@
 {
     "motors": [
         {
-            "name": "j_2",
+            "name": "j_41",
             "vendor_type": "eRob", 
-            "node_id": 2,            
+            "node_id": 41,            
             "pulse_per_revolution": 524288,
             "zero_offset": 0,
             "operation_mode": "PROFILE_POSITION",
@@ -12,6 +12,71 @@
             "profile_deceleration": 0.05,
             "min_position_limit": -0.35,
             "max_position_limit": 0.35
+        },
+        {
+            "name": "j_42",
+            "vendor_type": "eRob", 
+            "node_id": 42,            
+            "pulse_per_revolution": 524288,
+            "zero_offset": 0,
+            "operation_mode": "PROFILE_POSITION",
+            "profile_velocity": 0.05,
+            "profile_acceleration": 0.05,
+            "profile_deceleration": 0.05,
+            "min_position_limit": 0.43,
+            "max_position_limit": 1.13
+        },
+        {
+            "name": "j_43",
+            "vendor_type": "eRob", 
+            "node_id": 43,            
+            "pulse_per_revolution": 524288,
+            "zero_offset": 0,
+            "operation_mode": "PROFILE_POSITION",
+            "profile_velocity": 0.05,
+            "profile_acceleration": 0.05,
+            "profile_deceleration": 0.05,
+            "min_position_limit": 2.0,
+            "max_position_limit": 2.7
+        },
+        {
+            "name": "j_51",
+            "vendor_type": "eRob", 
+            "node_id": 51,            
+            "pulse_per_revolution": 524288,
+            "zero_offset": 0,
+            "operation_mode": "PROFILE_POSITION",
+            "profile_velocity": 0.05,
+            "profile_acceleration": 0.05,
+            "profile_deceleration": 0.05,
+            "min_position_limit": -0.35,
+            "max_position_limit": 0.35
+        },
+        {
+            "name": "j_52",
+            "vendor_type": "eRob", 
+            "node_id": 52,            
+            "pulse_per_revolution": 524288,
+            "zero_offset": 0,
+            "operation_mode": "PROFILE_POSITION",
+            "profile_velocity": 0.05,
+            "profile_acceleration": 0.05,
+            "profile_deceleration": 0.05,
+            "min_position_limit": 0.43,
+            "max_position_limit": 1.13
+        },
+        {
+            "name": "j_53",
+            "vendor_type": "eRob", 
+            "node_id": 53,            
+            "pulse_per_revolution": 524288,
+            "zero_offset": 0,
+            "operation_mode": "PROFILE_POSITION",
+            "profile_velocity": 0.05,
+            "profile_acceleration": 0.05,
+            "profile_deceleration": 0.05,
+            "min_position_limit": 2.0,
+            "max_position_limit": 2.7
         }
     ]
 }

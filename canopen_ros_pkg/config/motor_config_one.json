@@ -1,0 +1,18 @@
+{
+    "motors": [
+        {
+            "name": "j_2",
+            "vendor_type": "eRob", 
+            "node_id": 2,            
+            "pulse_per_revolution": 524288,
+            "zero_offset": 0,
+            "operation_mode": "PROFILE_POSITION",
+            "profile_velocity": 0.05,
+            "profile_acceleration": 0.05,
+            "profile_deceleration": 0.05,
+            "min_position_limit": -0.35,
+            "max_position_limit": 0.35
+        }
+    ]
+}
+
