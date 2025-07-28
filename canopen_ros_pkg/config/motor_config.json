@@ -1,0 +1,43 @@
+{
+    "motors": [
+        {
+            "name": "j_11",
+            "vendor_type": "eRob", 
+            "node_id": 11,            
+            "pulse_per_revolution": 524288,
+            "zero_offset": 0,
+            "operation_mode": "PROFILE_POSITION",
+            "profile_velocity": 6.28,
+            "profile_acceleration": 2.0,
+            "profile_deceleration": 2.0,
+            "min_position_limit": -0.35,
+            "max_position_limit": 0.35
+        },
+        {
+            "name": "j_12",
+            "vendor_type": "eRob", 
+            "node_id": 12,            
+            "pulse_per_revolution": 524288,
+            "zero_offset": 0,
+            "operation_mode": "PROFILE_POSITION",
+            "profile_velocity": 6.28,
+            "profile_acceleration": 2.0,
+            "profile_deceleration": 2.0,
+            "min_position_limit": -1.13,
+            "max_position_limit": -0.43
+        },
+        {
+            "name": "j_13",
+            "vendor_type": "eRob", 
+            "node_id": 13,            
+            "pulse_per_revolution": 524288,
+            "zero_offset": 0,
+            "operation_mode": "PROFILE_POSITION",
+            "profile_velocity": 6.28,
+            "profile_acceleration": 2.0,
+            "profile_deceleration": 2.0,
+            "min_position_limit": -2.7,
+            "max_position_limit": -2.0
+        }
+    ]
+}

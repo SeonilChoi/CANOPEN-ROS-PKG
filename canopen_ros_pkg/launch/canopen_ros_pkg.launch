@@ -1,0 +1,13 @@
+<launch>
+  <node pkg="canopen_ros_pkg"
+        type="canopen_ros_node.py"
+        name="canopen_ros_node"
+        ns="canopen"
+        output="screen"
+        cwd="node">
+    
+    <param name="motor_config_file_path" value="$(find canopen_ros_pkg)/config/motor_config.json"/>
+    <param name="channel" value="can0"/>
+  
+  </node>
+</launch>
