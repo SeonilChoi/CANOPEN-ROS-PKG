@@ -26,9 +26,13 @@ class CANopenROSNode(Node):
         self.declare_parameter('motor_config_file_path', '')
         motor_config_file_path = self.get_parameter(
             'motor_config_file_path').get_parameter_value().string_value
-        
+       
+        self.declare_parameter('channel', '')
+        channel = self.get_parameter(
+            'channel').get_parameter_value().string_value
+
         try:
-            self.motor_manager = load_motor_manager(motor_config_file_path, channel='can1')
+            self.motor_manager = load_motor_manager(motor_config_file_path, channel=channel)
             self.motor_manager.start_sync_all_motors(interval=0.01)
         except Exception as e:
             self.get_logger().error(f'\n[CANopenROSNode::init] ❌ Failed to initialize motors: {e}')

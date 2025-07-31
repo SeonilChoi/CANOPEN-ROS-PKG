@@ -9,6 +9,7 @@ def generate_launch_description():
     canopen_ros_pkg_path = get_package_share_directory('canopen_ros_pkg')
 
     motor_config_file_path = LaunchConfiguration('motor_config_file_path')
+    channel = LaunchConfiguration('channel')
 
     canopen_ros_node = Node(
         package='canopen_ros_pkg',
@@ -16,7 +17,8 @@ def generate_launch_description():
         name='canopen_ros_node',
         namespace='canopen',
         parameters=[
-            {'motor_config_file_path': motor_config_file_path}
+            {'motor_config_file_path': motor_config_file_path,
+             'channel': channel}
         ],
         output='screen',
     )
@@ -24,8 +26,13 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
             'motor_config_file_path',
-            default_value=os.path.join(canopen_ros_pkg_path, 'config', 'motor_config.json'),
+            default_value=os.path.join(canopen_ros_pkg_path, 'config', 'motor_config_all.json'),
             description='Motor config file path'
+        ),
+        DeclareLaunchArgument(
+            'channel',
+            default_value='can1',
+            description='CAN device'
         ),
         canopen_ros_node
     ])

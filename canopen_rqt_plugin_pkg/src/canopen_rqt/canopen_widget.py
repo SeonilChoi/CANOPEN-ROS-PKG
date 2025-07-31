@@ -6,7 +6,7 @@ from python_qt_binding import loadUi
 from python_qt_binding.QtWidgets import QMainWindow, QWidget, QTabWidget, QGroupBox
 from python_qt_binding.QtWidgets import QVBoxLayout, QHBoxLayout
 from python_qt_binding.QtWidgets import QLabel, QMenu, QAction, QStyle
-from python_qt_binding.QtWidgets import QSlider, QToolButton, QPushButton, QPlainTextEdit
+from python_qt_binding.QtWidgets import QRadioButton, QSlider, QToolButton, QPushButton, QPlainTextEdit
 from python_qt_binding.QtCore import Qt, QTimer
 
 import rclpy
@@ -62,6 +62,7 @@ class CANopenWidget(QMainWindow):
         self.times = []
         self.selected_motor_name = None
         self.relative_value = 0
+        self.is_plotting = True
 
         self.initialize_ui()
 
@@ -87,11 +88,19 @@ class CANopenWidget(QMainWindow):
         state_monitor = QGroupBox("State Monitor", first_tab)
         state_monitor_layout = QVBoxLayout(state_monitor)
 
+        # Plotting Button
+        plotting_btn = QRadioButton('Plotting')
+        plotting_btn.setChecked(True)
+        plotting_btn.clicked.connect(
+            self.on_plotting_button_clicked
+        )        
+
         self.pos_plot_widget = pg.PlotWidget(title="Position")
         self.pos_plot_widget.setBackground('w')
         self.tau_plot_widget = pg.PlotWidget(title="Torque")
         self.tau_plot_widget.setBackground('w')
         
+        state_monitor_layout.addWidget(plotting_btn, 0, Qt.AlignRight)
         state_monitor_layout.addWidget(self.pos_plot_widget)
         state_monitor_layout.addWidget(self.tau_plot_widget)
   
@@ -156,6 +165,9 @@ class CANopenWidget(QMainWindow):
             self.name_to_index = {}
             self.add_motor_command_publisher()
 
+    def on_plotting_button_clicked(self):
+        self.is_plotting = False if self.is_plotting else True
+
     def on_control_motor_selected(self, name):
         if self.motor_state:
             self.selected_motor_name = name
@@ -204,7 +216,8 @@ class CANopenWidget(QMainWindow):
             self.motor_command_publishers[self.selected_motor_name].publish(msg)
 
     def update_indicators(self):
-        self.plot_graph()
+        if self.is_plotting:
+            self.plot_graph()
         self.relative_value = self.value_text.toPlainText()
         if self.relative_value != "":
             self.relative_value = float(self.relative_value) / 100
