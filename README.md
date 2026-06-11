@@ -7,6 +7,11 @@
 ## Requirements
 - canopen_sdk==0.0.1
 
+## Clone
+```
+git clone --recurse-submodules https://github.com/SeonilChoi/canopen_ros2.git
+```
+
 ## Build
 ```
 colcon build --packages-select canopen_msgs canopen_ros_pkg canopen_rqt_plugin_pkg
